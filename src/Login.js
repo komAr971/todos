@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { useFetcher } from "react-router-dom";
 
-export default function Register() {
+export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPasswod] = useState('');
   const fetcher = useFetcher();
 
   const handleFormSubmit = evt => {
     evt.preventDefault();
-    fetcher.submit({ email, password }, { action: '/register', method: 'post' })
+    fetcher.submit({ email, password }, { action: '/login', method: 'post' })
   }
 
   const handleFormReset = () => {
@@ -18,7 +18,7 @@ export default function Register() {
 
   return (
     <section>
-      <h1>Регистрация</h1>
+      <h1>Вход</h1>
       <form onSubmit={handleFormSubmit} onReset={handleFormReset}>
         <div className="field">
           <label className="label">Адрес электронной почты</label>
@@ -37,7 +37,7 @@ export default function Register() {
             <input type="reset" className="button is-warning is-light" value="Сброс" />
           </div>
           <div classname="control">
-            <input type="submit" className="button is-primary" value="Зарегистрироваться" />
+            <input type="submit" className="button is-primary" value="Войти" />
           </div>
         </div>
       </form>

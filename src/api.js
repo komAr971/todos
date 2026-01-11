@@ -1,5 +1,5 @@
 import { redirect } from "react-router-dom";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 import todos from './todos.js';
 import firebaseApp from './firebase.js';
@@ -9,15 +9,35 @@ const auth = getAuth(firebaseApp);
 export async function register({ request }) {
   const fd = await request.formData();
   try {
-    const oUC = await createUserWithEmailAndPassword(
+    //const oUC = 
+    await createUserWithEmailAndPassword(
       auth,
       fd.get('email'),
       fd.get('password')
     );
-    redirect('/')
+    return redirect('/')
   } catch (err) {
     return err.code;
   }
+}
+
+export function setStateChangeHandler(func) {
+  return onAuthStateChanged(auth, func)
+}
+
+export async function login({ request }) {
+  const fd = await request.formData();
+  try {
+    await signInWithEmailAndPassword(auth, fd.get('email'), fd.get('password'))
+    return redirect('/')
+  } catch (err) {
+    return err.code;
+  }
+}
+
+export async function logout() {
+  await signOut(auth);
+  return redirect('/login');
 }
 
 export function getTodos() {
