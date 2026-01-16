@@ -33,10 +33,10 @@ export default function Login() {
           </div>
         </div>
         <div className="field is-grouped is-grouped-right">
-          <div classname="control">
+          <div className="control">
             <input type="reset" className="button is-warning is-light" value="Сброс" />
           </div>
-          <div classname="control">
+          <div className="control">
             <input type="submit" className="button is-primary" value="Войти" />
           </div>
         </div>
